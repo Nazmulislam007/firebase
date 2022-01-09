@@ -1,5 +1,13 @@
-const submit = document.querySelector(".submit");
-const input = document.querySelector(".input");
+const name = document.querySelector(".name");
+const roll = document.querySelector(".roll");
+const section = document.querySelector(".section");
+const idNum = document.querySelector(".id");
+const genbox = document.querySelector("#genbox");
+
+const insertBtn = document.querySelector(".insert");
+const getBtn = document.querySelector(".get");
+const updateBtn = document.querySelector(".update");
+const deleteBtn = document.querySelector(".delete");
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-app.js";
 
@@ -20,14 +28,69 @@ import {
   getDatabase,
   ref,
   set,
+  get,
   push,
+  child,
+  update,
+  remove,
 } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-database.js";
 
-const database = getDatabase(app);
+const db = getDatabase(app);
 
-submit.addEventListener("click", (e) => {
+//! insert data
+insertBtn.addEventListener("click", (e) => {
   e.preventDefault();
-  const inputVal = input.value;
-  //   set(ref(database, "/user"), inputVal);
-  //   push(ref(database, "/user"), inputVal);
+  const nameVal = name.value;
+  const rollVal = roll.value;
+  const sectionVal = section.value;
+  const idNumVal = idNum.value;
+  const genboxVal = genbox.value;
+  set(ref(db, "TheStudent/" + idNumVal), {
+    StudentName: nameVal,
+    RollNo: rollVal,
+    Section: sectionVal,
+    Gender: genboxVal,
+  })
+    .then(() => {
+      alert("data insert successfully");
+    })
+    .catch((err) => {
+      alert(`get an error ${err}`);
+    });
+  // push(ref(db, "TheStudent/"), {
+  //   StudentName: nameVal,
+  //   RollNo: rollVal,
+  //   Section: sectionVal,
+  //   Gender: genboxVal,
+  // });
 });
+
+//! get data
+getBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+});
+
+//! update data
+updateBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+});
+
+//! delete data
+deleteBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+});
+
+// submit.addEventListener("click", (e) => {
+//   e.preventDefault();
+//   const inputVal = input.value;
+//   // set(ref(database, "/user"), inputVal);
+//   push(ref(database, "/user"), inputVal);
+// });
+
+// showData.addEventListener("click", () => {
+//   const refer = ref(database, "/user");
+//   onValue(refer, (snapshot) => {
+//     const data = snapshot.val();
+//     const arr = Object.entries(data);
+//   });
+// });

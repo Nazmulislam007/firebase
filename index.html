@@ -4,13 +4,32 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Firebase</title>
+    <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
     <form>
-      <input type="text" class="input" />
-      <button class="submit">Submit</button>
+      <div>
+        <input type="text" placeholder="Jhon" class="name" />
+        <input type="text" class="roll" placeholder="Roll" />
+      </div>
+      <div>
+        <input type="text" placeholder="Section" class="section" />
+        <input type="text" placeholder="Id" class="id" />
+      </div>
+      <select id="genbox">
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+      <div class="buttons">
+        <button class="insert">Insert</button>
+        <button class="get">Get</button>
+        <button class="update">Update</button>
+        <button class="delete">Delete</button>
+      </div>
     </form>
+
+    <div class="showData"></div>
     <script type="module" src="/index.js"></script>
   </body>
 </html>
