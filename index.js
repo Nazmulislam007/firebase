@@ -9,6 +9,8 @@ const getBtn = document.querySelector(".get");
 const updateBtn = document.querySelector(".update");
 const deleteBtn = document.querySelector(".delete");
 
+const showData = document.querySelector(".showData");
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-app.js";
 
 const firebaseConfig = {
@@ -45,6 +47,9 @@ insertBtn.addEventListener("click", (e) => {
   const sectionVal = section.value;
   const idNumVal = idNum.value;
   const genboxVal = genbox.value;
+  if (!idNumVal || !nameVal || !rollVal || !sectionVal || !genboxVal) {
+    return alert("fill the data first");
+  }
   set(ref(db, "TheStudent/" + idNumVal), {
     StudentName: nameVal,
     RollNo: rollVal,
@@ -68,16 +73,56 @@ insertBtn.addEventListener("click", (e) => {
 //! get data
 getBtn.addEventListener("click", (e) => {
   e.preventDefault();
+  const idNumVal = idNum.value;
+  get(child(ref(db), "TheStudent/" + idNumVal))
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        showData.innerHTML = `${snapshot.val().StudentName}`;
+      } else {
+        alert("no data found");
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
 
 //! update data
 updateBtn.addEventListener("click", (e) => {
   e.preventDefault();
+  const nameVal = name.value;
+  const rollVal = roll.value;
+  const sectionVal = section.value;
+  const idNumVal = idNum.value;
+  const genboxVal = genbox.value;
+  if (!idNumVal || !nameVal || !rollVal || !sectionVal || !genboxVal) {
+    return alert("fill the data first");
+  }
+  update(ref(db, "TheStudent/" + idNumVal), {
+    StudentName: nameVal,
+    RollNo: rollVal,
+    Section: sectionVal,
+    Gender: genboxVal,
+  })
+    .then(() => {
+      alert("data update successfully");
+    })
+    .catch((err) => {
+      alert(`get an error ${err}`);
+    });
 });
 
 //! delete data
 deleteBtn.addEventListener("click", (e) => {
   e.preventDefault();
+  const idNumVal = idNum.value;
+  remove(ref(db, "TheStudent/" + idNumVal))
+    .then(() => {
+      alert("data delete successfully");
+    })
+    .catch((err) => {
+      alert(`get an error ${err}`);
+    });
 });
 
 // submit.addEventListener("click", (e) => {

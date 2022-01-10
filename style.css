@@ -12,6 +12,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
 form {
@@ -55,4 +56,17 @@ button {
 button:hover {
   background: black;
   color: #fff;
+}
+
+.showData {
+  position: absolute;
+  top: 5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2rem;
+  color: #fff;
+  font-weight: bold;
+  box-shadow: 2px 5px 5px black;
+  padding: 0 2rem;
+  border-radius: 5px;
 }
